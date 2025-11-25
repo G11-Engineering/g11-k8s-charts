@@ -1,0 +1,24 @@
+services:
+  user:
+    image: "jasonmishi/g11-user-service:latest"
+    port: 3001
+
+  content:
+    image: "jasonmishi/g11-content-service:latest"
+    port: 3002
+
+  media:
+    image: "jasonmishi/g11-media-service:latest"
+    port: 3003
+
+  category:
+    image: "jasonmishi/g11-category-service:latest"
+    port: 3004
+
+  comment:
+    image: "jasonmishi/g11-comment-service:latest"
+    port: 3005
+
+  frontend:
+    image: "jasonmishi/g11-frontend-service:latest"
+    port: 3000
