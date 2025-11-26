@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "media-service.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "media-service.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "media-service.name" . }}
+    spec:
+      containers:
+        - name: media
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          env:
+            - name: NODE_ENV
+              value: "{{ .Values.env.NODE_ENV }}"
+            - name: PORT
+              value: "{{ .Values.env.PORT }}"
+            - name: DATABASE_URL
+              value: "{{ .Values.env.DATABASE_URL }}"
+            - name: UPLOAD_PATH
+              value: "{{ .Values.env.UPLOAD_PATH }}"
+          volumeMounts:
+            - name: uploads
+              mountPath: {{ .Values.env.UPLOAD_PATH }}
+      volumes:
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: {{ include "media-service.fullname" . }}-pvc

@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  repository: jasonmishi/g11-category-service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 3004
+  targetPort: 3004
+
+env:
+  NODE_ENV: production
+  PORT: "3004"
+  DATABASE_URL: "postgresql://category_service:category_password@postgres-category:5432/category_service"

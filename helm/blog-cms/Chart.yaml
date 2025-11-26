@@ -1,6 +1,0 @@
-apiVersion: v2
-name: blog-cms
-description: Umbrella chart for the blog CMS platform (review only)
-type: application
-version: 0.1.0
-appVersion: "1.0"

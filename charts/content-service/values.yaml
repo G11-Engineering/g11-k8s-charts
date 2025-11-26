@@ -1,0 +1,16 @@
+replicaCount: 1
+
+image:
+  repository: jasonmishi/g11-content-service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 3002
+  targetPort: 3002
+
+env:
+  NODE_ENV: production
+  PORT: "3002"
+  DATABASE_URL: "postgresql://content_service:content_password@postgres-content:5432/content_service"
+  CATEGORY_SERVICE_URL: "http://category-service:3004"

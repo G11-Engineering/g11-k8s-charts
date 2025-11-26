@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  repository: jasonmishi/g11-frontend
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 3000
+  targetPort: 3000
+
+env:
+  NODE_ENV: production
+  PORT: "3000"
+  NEXT_PUBLIC_API_BASE_URL: "http://localhost"

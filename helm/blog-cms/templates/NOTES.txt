@@ -1,2 +1,0 @@
-This is an umbrella chart for review only.
-No production deployment logic included.

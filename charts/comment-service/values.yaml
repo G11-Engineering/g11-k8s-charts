@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  repository: jasonmishi/g11-comment-service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 3005
+  targetPort: 3005
+
+env:
+  NODE_ENV: production
+  PORT: "3005"
+  DATABASE_URL: "postgresql://comment_service:comment_password@postgres-comment:5432/comment_service"

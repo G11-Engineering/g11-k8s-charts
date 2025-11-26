@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "content-service.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "content-service.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "content-service.name" . }}
+    spec:
+      containers:
+        - name: content
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          env:
+            - name: NODE_ENV
+              value: "{{ .Values.env.NODE_ENV }}"
+            - name: PORT
+              value: "{{ .Values.env.PORT }}"
+            - name: DATABASE_URL
+              value: "{{ .Values.env.DATABASE_URL }}"
+            - name: CATEGORY_SERVICE_URL
+              value: "{{ .Values.env.CATEGORY_SERVICE_URL }}"

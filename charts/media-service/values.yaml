@@ -1,0 +1,21 @@
+replicaCount: 1
+
+image:
+  repository: jasonmishi/g11-media-service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 3003
+  targetPort: 3003
+
+env:
+  NODE_ENV: production
+  PORT: "3003"
+  DATABASE_URL: "postgresql://media_service:media_password@postgres-media:5432/media_service"
+  UPLOAD_PATH: "/app/uploads"
+
+persistence:
+  enabled: true
+  size: 5Gi
+  storageClass: ""
