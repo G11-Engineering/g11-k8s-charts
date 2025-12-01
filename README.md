@@ -1,3 +1,5 @@
+---
+
 # CMS Blog Platform – Helm Charts
 
 This repository contains the Helm charts used to deploy the CMS Blog Platform.

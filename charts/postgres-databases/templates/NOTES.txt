@@ -1,0 +1,42 @@
+PostgreSQL Databases for CMS Blog Platform have been deployed!
+
+The following database services are now available:
+
+{{- range $dbKey, $dbConfig := .Values.databases }}
+{{- if $dbConfig.enabled }}
+
+📦 postgres-{{ $dbKey }}
+   Service: postgres-{{ $dbKey }}:{{ $dbConfig.port }}
+   Database: {{ $dbConfig.name }}
+   Username: {{ $dbConfig.username }}
+   Connection String: postgresql://{{ $dbConfig.username }}:{{ $dbConfig.password }}@postgres-{{ $dbKey }}:{{ $dbConfig.port }}/{{ $dbConfig.name }}
+{{- end }}
+{{- end }}
+
+To verify the deployments:
+
+  kubectl get statefulsets -n {{ .Release.Namespace }}
+  kubectl get pods -n {{ .Release.Namespace }}
+  kubectl get services -n {{ .Release.Namespace }}
+  kubectl get pvc -n {{ .Release.Namespace }}
+
+To check logs for a specific database:
+
+  kubectl logs -n {{ .Release.Namespace }} postgres-user-0
+  kubectl logs -n {{ .Release.Namespace }} postgres-content-0
+  kubectl logs -n {{ .Release.Namespace }} postgres-media-0
+  kubectl logs -n {{ .Release.Namespace }} postgres-category-0
+  kubectl logs -n {{ .Release.Namespace }} postgres-comment-0
+
+To connect to a database:
+
+  kubectl exec -it -n {{ .Release.Namespace }} postgres-user-0 -- psql -U user_service -d user_service
+
+Next steps:
+
+  1. Verify all pods are running
+  2. Deploy your microservices (user-service, content-service, etc.)
+  3. Your services will automatically connect to these databases
+
+⚠️  IMPORTANT: The default passwords are set in values.yaml. 
+    For production, use Kubernetes Secrets or external secret management!

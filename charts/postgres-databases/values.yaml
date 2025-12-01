@@ -1,0 +1,62 @@
+# Default values for postgres-databases
+
+# Global settings
+global:
+  storageClass: ""  # Use default storage class
+
+# PostgreSQL image configuration
+image:
+  repository: postgres
+  tag: "15-alpine"
+  pullPolicy: IfNotPresent
+
+# Resource limits for each database
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+# Storage configuration
+persistence:
+  size: 5Gi
+  accessMode: ReadWriteOnce
+
+# Database configurations
+databases:
+  user:
+    enabled: true
+    name: user_service
+    username: user_service
+    password: user_password
+    port: 5432
+    
+  content:
+    enabled: true
+    name: content_service
+    username: content_service
+    password: content_password
+    port: 5432
+    
+  media:
+    enabled: true
+    name: media_service
+    username: media_service
+    password: media_password
+    port: 5432
+    
+  category:
+    enabled: true
+    name: category_service
+    username: category_service
+    password: category_password
+    port: 5432
+    
+  comment:
+    enabled: true
+    name: comment_service
+    username: comment_service
+    password: comment_password
+    port: 5432

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: postgres-databases
+description: PostgreSQL databases for CMS Blog Platform microservices
+version: 0.1.0
+appVersion: "15"
