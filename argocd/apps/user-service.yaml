@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: user-service
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/G11-Engineering/g11-k8s-charts.git
+    targetRevision: HEAD
+    path: charts/user-service
+    helm:
+      releaseName: user-service
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
